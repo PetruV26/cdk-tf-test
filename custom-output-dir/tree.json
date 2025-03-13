@@ -1,0 +1,209 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "TestStack": {
+        "id": "TestStack",
+        "path": "TestStack",
+        "children": {
+          "QATerraformStateBucket": {
+            "id": "QATerraformStateBucket",
+            "path": "TestStack/QATerraformStateBucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "TestStack/QATerraformStateBucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "lifecycleConfiguration": {
+                      "rules": [
+                        {
+                          "status": "Enabled",
+                          "transitions": [
+                            {
+                              "storageClass": "STANDARD_IA",
+                              "transitionInDays": 30
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "versioningConfiguration": {
+                      "status": "Enabled"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.181.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.181.1",
+              "metadata": [
+                {
+                  "versioned": true,
+                  "removalPolicy": "destroy",
+                  "lifecycleRules": [
+                    {
+                      "enabled": true,
+                      "transitions": "*"
+                    }
+                  ]
+                },
+                {
+                  "addLifecycleRule": [
+                    {
+                      "enabled": true,
+                      "transitions": "*"
+                    },
+                    "*",
+                    "*"
+                  ]
+                }
+              ]
+            }
+          },
+          "ProdTerraformStateTable": {
+            "id": "ProdTerraformStateTable",
+            "path": "TestStack/ProdTerraformStateTable",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "TestStack/ProdTerraformStateTable/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "LockID",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "billingMode": "PAY_PER_REQUEST",
+                    "keySchema": [
+                      {
+                        "attributeName": "LockID",
+                        "keyType": "HASH"
+                      }
+                    ],
+                    "tableName": "TerraformStateTableProd"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                  "version": "2.181.1"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "TestStack/ProdTerraformStateTable/ScalingRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.181.1",
+                  "metadata": [
+                    "*"
+                  ]
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+              "version": "2.181.1",
+              "metadata": [
+                {
+                  "partitionKey": {
+                    "name": "*",
+                    "type": "S"
+                  },
+                  "tableName": "*",
+                  "removalPolicy": "destroy",
+                  "billingMode": "PAY_PER_REQUEST"
+                }
+              ]
+            }
+          },
+          "QABucketName": {
+            "id": "QABucketName",
+            "path": "TestStack/QABucketName",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.181.1"
+            }
+          },
+          "ProdTableName": {
+            "id": "ProdTableName",
+            "path": "TestStack/ProdTableName",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.181.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "TestStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "TestStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.181.1"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "TestStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.181.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "TestStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.181.1"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "TestStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.181.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.181.1"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.4.2"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.181.1"
+    }
+  }
+}
